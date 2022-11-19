@@ -1,0 +1,12 @@
+{
+    "ignore": [
+        ".git",
+        "dist",
+        "node_modules/**/node_modules"
+    ],
+    "verbose": false,
+    "execMap": {
+        "js": "node",
+        "ts": "ts-node -r tsconfig-paths/register"
+    }
+}
