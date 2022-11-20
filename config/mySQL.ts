@@ -3,7 +3,8 @@ const mysql_config = {
     host: '127.0.0.1',
     username: 'root',
     password: '123456',
-    database: 'woodfish'
+    database: 'woodfish',
+    logging: false
 }
 
 export {

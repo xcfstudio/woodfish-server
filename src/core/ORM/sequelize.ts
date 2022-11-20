@@ -6,7 +6,8 @@ const sequelize = new Sequelize({
     username: config.username,
     password: config.password,
     host: config.host,
-    database: config.database
+    database: config.database,
+    logging: config.logging
 })
 // sequelize.sync()
 
