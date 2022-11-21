@@ -24,6 +24,7 @@
   "dependencies": {
     "@koa/router": "^12.0.0",
     "bcrypt": "^5.1.0",
+    "class-validator": "^0.13.2",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "mysql2": "^2.3.3",

@@ -9,6 +9,5 @@ const sequelize = new Sequelize({
     database: config.database,
     logging: config.logging
 })
-// sequelize.sync()
 
 export default sequelize
