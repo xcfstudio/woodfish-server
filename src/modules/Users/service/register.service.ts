@@ -16,7 +16,6 @@ const register: Middleware = async ctx => {
     try {
         const err = await validate(dto)
         if (err.length) {
-            ctx.status = 400
             ctx.body = new Failure('验证失败', [], err)
             return
         }
@@ -38,13 +37,11 @@ const register: Middleware = async ctx => {
     try {
         // 存入数据库
         await user.save()
-        ctx.status = 200
         ctx.body = new Success('注册成功！', {
             uid,
             username: `User_${uid}`
         })
     } catch (error:any) {
-        ctx.status = 500
         ctx.body = new ServerError(
             error.errors[0].message, [], error.name
         )

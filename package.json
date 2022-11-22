@@ -6,8 +6,8 @@
   "author": "Eric Xie",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./node_modules/.bin/nodemon index.ts",
-    "build": "node ./node_modules/.bin/tsc",
+    "dev": "./node_modules/.bin/nodemon index.ts",
+    "build": "./node_modules/.bin/tsc",
     "production": "npm run build && node ./dist/bin/go.js"
   },
   "devDependencies": {
