@@ -39,6 +39,15 @@ const verifyUserName = (userName: string): boolean => {
    return userName.length >= 2 && userName.length <= user_config.uidLength + 8
 }
 
+
+const getAccountType = (account: string): 'email'|'phone'|'name'|'uid'|false => {
+    if (verifyEmail(account)) return 'email'
+    if (verifyPhoneNumber(account)) return 'phone'
+    if (verifyUserName(account)) return 'name'
+    if (verifyUid(account)) return 'uid'
+    return false
+}
+
 export {
-    verifyEmail, verifyPhoneNumber, verifyUid, verifyUserName
+    verifyEmail, verifyPhoneNumber, verifyUid, verifyUserName, getAccountType
 }

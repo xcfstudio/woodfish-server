@@ -3,30 +3,16 @@ import UserAccount from "@/models/UserAccount"
 import { createRandomIdUnique } from "@/utils/createRandomId";
 import { user_config } from "config/user";
 import RegisterDto from '../dto/register.dto'
-import { validate } from "class-validator";
-import { Failure, ServerError, Success } from "@/classes/BasicResponse.class";
+import { Failure, ServerError, Success, ValidateError } from "@/classes/BasicResponse.class";
+import validateBodyDto from "@/utils/validateBodyDto";
 
 const register: Middleware = async ctx => {
-    const body = (ctx.request.body as RegisterDto)
-
+    const body = ctx.request.body as RegisterDto
     // dto验证
-    const dto = new RegisterDto(
-        body.useremail, body.password, body.userphone, body.verifycode
-    )
-    try {
-        const err = await validate(dto)
-        const t_err: any[] = []
-        err.forEach(v => {
-            delete v.target
-            t_err.push(v)
-        })
-        if (err.length) {
-            ctx.body = new Failure('验证失败', {}, t_err)
-            return
-        }
-    } catch (error: any) {
-        ctx.body = new ServerError('server error', {}, error)
-        return
+    const err = await validateBodyDto(new RegisterDto(body))
+    if (err) {
+        ctx.body = new ValidateError(err)
+        return // 此处务必return
     }
 
     // 生成随机唯一用户ID

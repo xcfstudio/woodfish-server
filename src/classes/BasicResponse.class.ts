@@ -22,14 +22,14 @@ class Failure implements ResponseInterface {
     data: object | any[];
     error?: any
 
-    constructor(message: string, data: object | any[], error: object | any[] | undefined) {
+    constructor(message: string, data: object | any[] = {}, error: object | any[] | undefined = {}) {
         this.code = 400
         this.status = 'failure'
         this.message = message
         this.data = data
         this.error = error
     }
-    
+
 }
 
 class ServerError implements ResponseInterface {
@@ -38,17 +38,30 @@ class ServerError implements ResponseInterface {
     message: string;
     data?: object | any[];
     error?: any
-    constructor(message: string, data: object | any[], error: object | any[] | undefined) {
+    constructor(message: string, data: object | any[] = {}, error: object | any[] | undefined = {}) {
         this.code = 500
         this.status = 'error'
         this.message = message
         this.data = data
         this.error = error
     }
-    
-    
+}
+
+class ValidateError implements ResponseInterface {
+    code: number;
+    status: string;
+    message: string;
+    data?: object | any[] | undefined;
+    error?: any;
+    constructor(err: object|any[]) {
+        this.code = 400
+        this.status = 'failure'
+        this.message = 'Validate Error!'
+        this.data = {}
+        this.error = err
+    }
 }
 
 export {
-    Success, Failure, ServerError
+    Success, Failure, ServerError, ValidateError
 }
