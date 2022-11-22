@@ -1,5 +1,5 @@
 import { Success } from "@/classes/BasicResponse.class";
-import UserAccount from "@/models/UserAccount";
+import {UserAccount} from "@/models/UserAccount";
 import { Middleware } from "koa";
 
 const emailCheck: Middleware = async ctx => {

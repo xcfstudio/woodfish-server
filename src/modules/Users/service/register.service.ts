@@ -1,5 +1,5 @@
 import { Middleware } from "koa";
-import UserAccount from "@/models/UserAccount"
+import {UserAccount} from "@/models/UserAccount"
 import { createRandomIdUnique } from "@/utils/createRandomId";
 import { user_config } from "config/user";
 import RegisterDto from '../dto/register.dto'

@@ -1,12 +1,11 @@
-import { DataTypes, Model } from "sequelize"
+import { DataTypes, Model, ModelAttributes } from "sequelize"
 import sequelize from "@/core/ORM/sequelize"
 import { hashSync } from "@/utils/hash"
 import { user_config } from "config/user"
 
 class UserAccount extends Model {}
 
-
-UserAccount.init({
+const initOptions: ModelAttributes = {
     uid: {
         type: DataTypes. STRING(user_config.uidLength),
         allowNull: false,
@@ -33,9 +32,11 @@ UserAccount.init({
             this.setDataValue('password', hashSync(value))
         }
     }
-}, {
+}
+
+UserAccount.init(initOptions, {
     sequelize,
     modelName: 'UserAccount'
 })
 
-export default UserAccount
+export {UserAccount, initOptions} 
