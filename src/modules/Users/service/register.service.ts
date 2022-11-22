@@ -15,12 +15,17 @@ const register: Middleware = async ctx => {
     )
     try {
         const err = await validate(dto)
+        const t_err: any[] = []
+        err.forEach(v => {
+            delete v.target
+            t_err.push(v)
+        })
         if (err.length) {
-            ctx.body = new Failure('验证失败', [], err)
+            ctx.body = new Failure('验证失败', {}, t_err)
             return
         }
     } catch (error: any) {
-        ctx.body = new ServerError('server error', [], error)
+        ctx.body = new ServerError('server error', {}, error)
         return
     }
 
@@ -43,7 +48,7 @@ const register: Middleware = async ctx => {
         })
     } catch (error:any) {
         ctx.body = new ServerError(
-            error.errors[0].message, [], error.name
+            error.errors[0].message, {}, error.name
         )
     }
 }

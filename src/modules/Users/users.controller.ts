@@ -13,4 +13,8 @@ router.post('/register', registerService)
 import forgetService from './service/forget.service'
 router.post('/forget', forgetService)
 
+// EXIST CHECK
+import existCheckController from './modules/ExistCheck/existcheck.controller'
+router.use('/exist', existCheckController.routes())
+
 export default router
