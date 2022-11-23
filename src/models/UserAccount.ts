@@ -31,6 +31,11 @@ const initOptions: ModelAttributes = {
         set(value: string) {
             this.setDataValue('password', hashSync(value))
         }
+    },
+    status: {
+        type: DataTypes.STRING(5),
+        allowNull: false,
+        defaultValue: 'Y'
     }
 }
 
@@ -38,5 +43,7 @@ UserAccount.init(initOptions, {
     sequelize,
     modelName: 'UserAccount'
 })
+
+console.log('已载入 -- UserAccount模型')
 
 export {UserAccount, initOptions} 

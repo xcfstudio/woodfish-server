@@ -2,7 +2,7 @@
 
 ## 生成私钥
 ```shell
-openssl genrsa -out ./rsa_private_key.pem 2048
+openssl genrsa -out ./rsa_private_key.pem 1024
 ```
 
 ## 根据私钥生成公钥

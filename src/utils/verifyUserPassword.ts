@@ -9,16 +9,24 @@ const mirror = {
     uid: 'uid'
 }
 
-const verifyUserPassword = async (accountType: 'email'|'phone'|'name'|'uid', account: string, password: string): Promise<false|object> => {
-    const res = await UserAccount.findOne({
-        attributes: ['username','uid','password'],
+interface VerifyResult {
+    username: string
+    uid: string
+    password: string
+    status: string
+    role?: string
+}
+
+const verifyUserPassword = async (accountType: 'email'|'phone'|'name'|'uid', account: string, password: string): Promise<false|VerifyResult> => {
+    const res = (await UserAccount.findOne({
+        attributes: ['username','uid','password','status'],
         where: {
            [mirror[accountType]]: account
         }
-    })
-    // @ts-ignore
+    })) as unknown as VerifyResult
+    
     if (res && res.password) {
-        // @ts-ignore
+        
        if (await compare(password, res.password)) {
         return res
        }
