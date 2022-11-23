@@ -20,7 +20,7 @@ const register: Middleware = async ctx => {
     const user = UserAccount.build({
         uid: uid,
         username: `User_${uid}`,
-        useremail: body.useremail,
+        useremail: body.useremail.toLowerCase(),
         userphone: body.userphone,
         password: body.password
     })
