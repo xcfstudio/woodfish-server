@@ -5,6 +5,7 @@ import { user_config } from "config/user";
 import RegisterDto from '../dto/register.dto'
 import { Failure, ServerError, Success, ValidateError } from "@/classes/BasicResponse.class";
 import validateBodyDto from "@/utils/validateBodyDto";
+import { UserInfo } from "@/models/UserInfo";
 
 const register: Middleware = async ctx => {
     const body = ctx.request.body as RegisterDto
@@ -22,12 +23,15 @@ const register: Middleware = async ctx => {
         username: `User_${uid}`,
         useremail: body.useremail.toLowerCase(),
         userphone: body.userphone,
-        password: body.password
+        password: body.password,
+    })
+    const userInfo = UserInfo.build({
+        uid
     })
 
     try {
         // 存入数据库
-        await user.save()
+        await Promise.all([user.save(), userInfo.save()])
         ctx.body = new Success('注册成功！', {
             uid,
             username: `User_${uid}`

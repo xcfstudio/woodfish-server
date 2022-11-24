@@ -2,18 +2,20 @@ import { DataTypes, Model, ModelAttributes } from "sequelize"
 import sequelize from "@/core/ORM/sequelize"
 import { hashSync } from "@/utils/hash"
 import { user_config } from "config/user"
+import { UserInfo } from "./UserInfo"
 
-class UserAccount extends Model {}
+// class UserAccount extends Model {}
 
 const initOptions: ModelAttributes = {
     uid: {
-        type: DataTypes. STRING(user_config.uidLength),
+        type: DataTypes.STRING(user_config.uidLength),
         allowNull: false,
         primaryKey: true,
+
         unique: true
     },
     username: {
-        type: DataTypes.STRING(user_config.uidLength+8),
+        type: DataTypes.STRING(user_config.uidLength + 8),
         allowNull: false,
         unique: true
     },
@@ -39,11 +41,15 @@ const initOptions: ModelAttributes = {
     }
 }
 
-UserAccount.init(initOptions, {
-    sequelize,
-    modelName: 'UserAccount'
+const UserAccount = sequelize.define('UserAccount', initOptions, {
+    freezeTableName: true
+})
+
+
+UserAccount.hasOne(UserInfo, {
+    foreignKey: 'uid'
 })
 
 console.log('已载入 -- UserAccount模型')
 
-export {UserAccount, initOptions} 
+export { UserAccount, initOptions } 

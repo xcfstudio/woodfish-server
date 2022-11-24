@@ -4,7 +4,7 @@ const mysql_config = {
     username: 'root',
     password: '123456',
     database: 'woodfish',
-    logging: false
+    logging: true
 }
 
 export {

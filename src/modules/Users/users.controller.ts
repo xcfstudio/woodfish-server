@@ -10,7 +10,7 @@ router.post('/login', loginService)
 // REFRESH
 // 刷新令牌
 import refreshToken from './service/refresh.service'
-router.use(jwtVerifyFactory({tokenType: 'refresh'}))
+router.use('/refresh',jwtVerifyFactory({tokenType: 'refresh'}))
 router.post('/refresh', refreshToken)
 
 // REGISTER
@@ -27,7 +27,13 @@ router.post('/forget', forgetService)
 // EXIST CHECK
 // 核查手机号、邮箱等是否已经被注册
 import existCheckController from './modules/ExistCheck/existcheck.controller'
-
 router.use('/exist', existCheckController.routes())
+
+// @Module
+// GET USER INFO
+// 获取用户基本信息
+import information from './modules/Information/information.controller'
+router.use('/information', jwtVerifyFactory())
+router.use('/information', information.routes())
 
 export default router
