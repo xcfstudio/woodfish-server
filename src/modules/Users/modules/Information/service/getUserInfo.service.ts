@@ -13,7 +13,7 @@ const getUserInfo: Middleware = async ctx => {
         // 联表查询
         include: [{
             model: UserInfo,
-            attributes: ['avatar', 'qqnumber', 'realname', 'gender', 'birthday', 'age']
+            attributes: ['avatar', 'qqnumber', 'realname', 'gender', 'birthday', 'age', 'province', 'city']
         }]
     })
     

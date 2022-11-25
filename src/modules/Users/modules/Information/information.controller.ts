@@ -4,7 +4,7 @@ const router = new Router()
 import getUserInfo from './service/getUserInfo.service'
 router.get('/', getUserInfo)
 
-
-router.put('/:uid')
+import updateUserInfo from './service/updateUserInfo.service'
+router.patch('/', updateUserInfo)
 
 export default router

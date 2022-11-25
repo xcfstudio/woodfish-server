@@ -18,7 +18,7 @@ const initOptions: ModelAttributes = {
     avatar: {
         type: STRING
     },
-    qqnumber: {
+    qqNumber: {
         type: STRING(20)
     },
     realName: {
