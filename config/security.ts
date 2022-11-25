@@ -1,3 +1,5 @@
+// 安全性配置文件
+
 const security_config = {
     // 加盐迭代次数
     saltRounds: 5,

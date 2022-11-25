@@ -1,5 +1,7 @@
 import ResponseInterface from "@/interfaces/ResponseInterface";
 
+// 基本响应模型
+
 class Success implements ResponseInterface {
     code: number;
     status: string;

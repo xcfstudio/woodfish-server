@@ -1,3 +1,4 @@
+// JWT负载部分约束
 
 interface JwtPayload {
     username: string

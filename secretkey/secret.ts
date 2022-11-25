@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
+// 私钥和公钥
+
 const secretKeys = {
     secretKey: '',
     publicKey: ''

@@ -2,6 +2,8 @@ import { DataTypes, Model, ModelAttributes, STRING } from "sequelize"
 import sequelize from "@/core/ORM/sequelize"
 import { user_config } from "config/user"
 
+// 用户个人信息模型，存储用户个人信息相关数据
+
 const initOptions: ModelAttributes = {
     tid: {
         type: DataTypes.INTEGER,

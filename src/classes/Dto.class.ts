@@ -1,3 +1,5 @@
+// Dto基类
+
 class Dto {
 
 }

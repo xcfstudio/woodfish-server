@@ -4,7 +4,7 @@ import { hashSync } from "@/utils/hash"
 import { user_config } from "config/user"
 import { UserInfo } from "./UserInfo"
 
-// class UserAccount extends Model {}
+// 用户账户模型，存储用户登陆相关数据
 
 const initOptions: ModelAttributes = {
     uid: {
