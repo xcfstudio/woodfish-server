@@ -6,6 +6,7 @@ import { Middleware } from "koa"
 import LoginDto from "../dto/login.dto"
 import { generateToken } from "@/utils/generateToken"
 import { security_config } from "config/security"
+import { sha256BasedCrypt } from "@/utils/hash"
 
 const login: Middleware = async ctx => {
    const body = ctx.request.body as LoginDto
@@ -37,7 +38,8 @@ const login: Middleware = async ctx => {
       const payload = {
          username: res_verify.username,
          uid: res_verify.uid,
-         status: res_verify.status
+         status: res_verify.status,
+         secret: sha256BasedCrypt(res_verify.password)
       }
       // 登陆成功则返回用户基本信息和签发的token
       ctx.body = new Success('Login success!', { ...payload, ...generateToken(payload), exptime: security_config.tokenExp })

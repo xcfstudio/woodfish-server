@@ -9,9 +9,9 @@ router.post('/login', loginService)
 
 // REFRESH
 // 刷新令牌
-import refreshToken from './service/refresh.service'
+import refreshTokenService from './service/refresh.service'
 router.use('/refresh',jwtVerifyFactory({tokenType: 'refresh'}))
-router.post('/refresh', refreshToken)
+router.post('/refresh', refreshTokenService)
 
 // REGISTER
 // 注册账号
@@ -21,10 +21,14 @@ router.post('/register', registerService)
 // FORGET
 // 忘记密码
 import forgetService from './service/forget.service'
+
 router.post('/forget', forgetService)
 
 // CHANGE PASSWORD
 // 修改密码
+import changePasswordService from './service/changePassword.service'
+router.use('/changepassword', jwtVerifyFactory({tokenType: 'refresh'}))
+router.post('/changepassword', changePasswordService)
 
 
 // @Module
