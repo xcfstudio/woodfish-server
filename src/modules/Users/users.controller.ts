@@ -27,9 +27,14 @@ router.post('/forget', forgetService)
 // CHANGE PASSWORD
 // 修改密码
 import changePasswordService from './service/changePassword.service'
-router.use('/changepassword', jwtVerifyFactory({tokenType: 'refresh'}))
+router.use('/changepassword', jwtVerifyFactory())
 router.post('/changepassword', changePasswordService)
 
+//LOGOUT
+// 退出登录
+import logoutService from './service/logout.service'
+router.use('/logout', jwtVerifyFactory())
+router.post('/logout', logoutService)
 
 // @Module
 // EXIST CHECK
