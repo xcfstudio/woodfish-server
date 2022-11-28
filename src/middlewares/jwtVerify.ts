@@ -1,4 +1,5 @@
 import { Failure } from "@/classes/BasicResponse.class";
+import { tokenFilter } from "@/utils/tokenRedis";
 import { security_config } from "config/security";
 import { Middleware } from "koa";
 import koaJwt from 'koa-jwt'
@@ -25,7 +26,16 @@ const jwtVerifyFactory = (options?: JwtVerifyFactoryOptions): Middleware => {
     const type = options && options.tokenType ? options.tokenType : 'access'
     return async (ctx, next) => {
         try {
-            const b64 = ctx.header.authorization?.split(' ')[1].split('.')[1] as string
+            // 获取完整token
+            const token_origrn = ctx.header.authorization?.split(' ')[1] || 'null'
+            // 判断token是否在黑名单中
+            const res = await tokenFilter(token_origrn)
+            if (res) {
+                ctx.body = new Failure('Token blocked!')
+                return
+            }
+            // 解码base64
+            const b64 = token_origrn!.split('.')[1] as string
             const jwtPayload = JSON.parse(Buffer.from(b64, 'base64').toString()) as JwtPayload
             if (jwtPayload && jwtPayload.type !== type) {
                 ctx.body = new Failure('Token type error!')

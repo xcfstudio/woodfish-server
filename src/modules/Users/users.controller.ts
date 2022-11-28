@@ -23,6 +23,10 @@ router.post('/register', registerService)
 import forgetService from './service/forget.service'
 router.post('/forget', forgetService)
 
+// CHANGE PASSWORD
+// 修改密码
+
+
 // @Module
 // EXIST CHECK
 // 核查手机号、邮箱等是否已经被注册
