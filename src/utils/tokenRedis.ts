@@ -19,7 +19,8 @@ const tokenFilter = async (jwtToken: string) => {
  * @returns 
  */
 const addTokenToBlacklist = async (jwtToken: string) => {
-    if (verifyTokenString(jwtToken)) return 'err'
+    
+    if (!verifyTokenString(jwtToken)) return 'err'
     const tokenSign = jwtToken.split('.')[2]
     await redisClient.select(1)
     return await redisClient.set(tokenSign, 'b', {
