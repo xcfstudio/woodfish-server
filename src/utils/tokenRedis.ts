@@ -1,5 +1,5 @@
 import { redisClient } from "@/core/REDIS/Redis"
-import { security_config } from "config/security"
+import { security_config } from "@@/config/security"
 import { verifyTokenString } from "./verify"
 
 /**

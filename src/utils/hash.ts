@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { security_config } from 'config/security'
+import { security_config } from '@@/config/security'
 import sha256 from 'sha256'
 
 /**
