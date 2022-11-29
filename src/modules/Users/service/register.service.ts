@@ -1,6 +1,6 @@
 import { Middleware } from "koa";
 import {UserAccount} from "@/models/UserAccount"
-import { createRandomIdUnique } from "@/utils/createRandomId";
+import { createRandomIdUnique } from "@/modules/Users/utils/createRandomId";
 import { user_config } from "config/user";
 import RegisterDto from '../dto/register.dto'
 import { Failure, ServerError, Success, ValidateError } from "@/classes/BasicResponse.class";

@@ -1,5 +1,5 @@
 import { UserAccount } from "@/models/UserAccount"
-import { compare } from "./hash"
+import { compare } from "../../../utils/hash"
 
 // 数据库字段映射表
 const mirror = {

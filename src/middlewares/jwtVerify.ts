@@ -1,7 +1,7 @@
 import { Failure } from "@/classes/BasicResponse.class";
 import { UserAccount } from "@/models/UserAccount";
 import { sha256BasedCrypt } from "@/utils/hash";
-import { tokenFilter } from "@/utils/tokenRedis";
+import { tokenFilter } from "@/modules/Users/utils/tokenRedis";
 import { security_config } from "config/security";
 import { Middleware } from "koa";
 import koaJwt from 'koa-jwt'

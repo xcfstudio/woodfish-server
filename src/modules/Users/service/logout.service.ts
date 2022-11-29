@@ -1,5 +1,5 @@
 import { Failure, Success } from "@/classes/BasicResponse.class";
-import { addTokenToBlacklist } from "@/utils/tokenRedis";
+import { addTokenToBlacklist } from "@/modules/Users/utils/tokenRedis";
 import validateBodyDto from "@/utils/validateBodyDto";
 import { Middleware } from "koa";
 import LogoutDto from "../dto/logout.dto";

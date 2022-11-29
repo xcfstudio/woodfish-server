@@ -1,6 +1,6 @@
 import { redisClient } from "@/core/REDIS/Redis"
-import { security_config } from "@@/config/security"
-import { verifyTokenString } from "./verify"
+import { security_config } from "config/security"
+import { verifyTokenString } from "../../../utils/verifyRegex"
 
 /**
  * 检测token是否存在于黑名单中

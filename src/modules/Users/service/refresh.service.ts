@@ -1,6 +1,6 @@
 import { Failure, Success } from "@/classes/BasicResponse.class";
 import { UserAccount } from "@/models/UserAccount";
-import { generateToken } from "@/utils/generateToken";
+import { generateToken } from "@/modules/Users/utils/generateToken";
 import { Middleware } from "koa";
 import { security_config } from 'config/security'
 

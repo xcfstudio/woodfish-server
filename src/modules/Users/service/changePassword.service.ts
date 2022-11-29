@@ -1,9 +1,9 @@
 import { Failure, Success } from "@/classes/BasicResponse.class";
 import { UserAccount } from "@/models/UserAccount";
-import { generateToken } from "@/utils/generateToken";
-import { addTokenToBlacklist } from "@/utils/tokenRedis";
+import { generateToken } from "@/modules/Users/utils/generateToken";
+import { addTokenToBlacklist } from "@/modules/Users/utils/tokenRedis";
 import validateBodyDto from "@/utils/validateBodyDto";
-import { verifyUserPassword } from "@/utils/verifyUserPassword";
+import { verifyUserPassword } from "@/modules/Users/utils/verifyUserPassword";
 import { Middleware } from "koa";
 import sha256 from "sha256";
 import ChangePasswordDto from "../dto/changePassword.dto";

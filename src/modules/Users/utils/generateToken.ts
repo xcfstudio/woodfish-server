@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
-import { secretKeys } from "@@/secretkey/secret"
-import { security_config } from "@@/config/security"
+import { secretKeys } from "secretkey/secret"
+import { security_config } from "config/security"
 import JwtPayload from '@/interfaces/JwtPayload'
 
 

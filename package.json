@@ -27,6 +27,7 @@
     "@types/sha256": "^0.2.0",
     "bcrypt": "^5.1.0",
     "class-validator": "^0.13.2",
+    "dayjs": "^1.11.6",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",

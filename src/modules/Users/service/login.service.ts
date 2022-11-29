@@ -1,10 +1,10 @@
 import { Failure, Success } from "@/classes/BasicResponse.class"
 import validateBodyDto from "@/utils/validateBodyDto"
-import { getAccountType } from "@/utils/verify"
-import { verifyUserPassword } from "@/utils/verifyUserPassword"
+import { getAccountType } from "@/utils/verifyRegex"
+import { verifyUserPassword } from "@/modules/Users/utils/verifyUserPassword"
 import { Middleware } from "koa"
 import LoginDto from "../dto/login.dto"
-import { generateToken } from "@/utils/generateToken"
+import { generateToken } from "@/modules/Users/utils/generateToken"
 import { security_config } from "config/security"
 import { sha256BasedCrypt } from "@/utils/hash"
 
