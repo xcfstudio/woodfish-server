@@ -41,19 +41,22 @@ const jwtVerifyFactory = (options?: JwtVerifyFactoryOptions): Middleware => {
             const b64 = token_origrn!.split('.')[1] as string
             const jwtPayload = JSON.parse(Buffer.from(b64, 'base64').toString()) as JwtPayload
 
-            // 验证密码是否被修改
-            const secret = jwtPayload.secret
-            const u_pwd = await UserAccount.findOne({
-                attributes: ['password'],
-                where: {
-                    uid: jwtPayload.uid
+            // 验证密码是否被修改(仅验证refresh token)
+            if (jwtPayload.type === 'refresh') {
+                const secret = jwtPayload.secret
+                const u_pwd = await UserAccount.findOne({
+                    attributes: ['password'],
+                    where: {
+                        uid: jwtPayload.uid
+                    }
+                })
+                const hash_pwd = sha256BasedCrypt(u_pwd?.toJSON().password)
+                if (secret !== hash_pwd) {
+                    ctx.body = new Failure('Password changed, please login!')
+                    return
                 }
-            })
-            const hash_pwd = sha256BasedCrypt(u_pwd?.toJSON().password)
-            if (secret !== hash_pwd) {
-                ctx.body = new Failure('Password changed, please login!')
-                return
             }
+
 
             if (jwtPayload && jwtPayload.type !== type) {
                 ctx.body = new Failure('Token type error!')

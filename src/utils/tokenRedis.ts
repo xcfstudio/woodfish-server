@@ -1,5 +1,6 @@
 import { redisClient } from "@/core/REDIS/Redis"
 import { security_config } from "config/security"
+import { verifyTokenString } from "./verify"
 
 /**
  * 检测token是否存在于黑名单中
@@ -18,6 +19,7 @@ const tokenFilter = async (jwtToken: string) => {
  * @returns 
  */
 const addTokenToBlacklist = async (jwtToken: string) => {
+    if (verifyTokenString(jwtToken)) return 'err'
     const tokenSign = jwtToken.split('.')[2]
     await redisClient.select(1)
     return await redisClient.set(tokenSign, 'b', {
