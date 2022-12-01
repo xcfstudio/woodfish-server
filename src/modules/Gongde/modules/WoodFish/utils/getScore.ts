@@ -3,6 +3,7 @@ import { GongdeScore } from "@/models/GongdeScore"
 import dayjs from 'dayjs'
 
 const getScoreFromRedis = async (uid: string) => {
+    await redisClient.select(0)
     return await redisClient.zScore(`${dayjs().format('YYYY-MM-DD')}:ranking`, uid)
 }
 
@@ -13,7 +14,7 @@ const getScoreFromSQL = async (uid: string) => {
             uid
         }
     })
-    return res
+    return res?.toJSON().woodfish
 }
 
 

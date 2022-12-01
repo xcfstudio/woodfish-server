@@ -9,6 +9,7 @@ import { getScoreFromSQL } from "./getScore";
  * @param score 
  */
 const setScoreToRedis = async (uid: string, score: number) => {
+    await redisClient.select(0)
     await redisClient.zAdd(`${dayjs().format('YYYY-MM-DD')}:ranking`, {value: uid, score })
 }
 
@@ -53,6 +54,18 @@ const addScoreToSQL = async (uid: string, score: number) => {
     await coverScoreToSQL(uid, res)
 }
 
+/**
+ * 创建一个功德字段，uid不存在的情况下
+ * @param uid 
+ * @param score 
+ */
+const createScoreField = async (uid: string, score: number) => {
+    await GongdeScore.create({
+        uid,
+        woodfish: score
+    })
+}
+
 export {
-    setScoreToRedis, setScoreToSQL, coverScoreToSQL, addScoreToSQL
+    setScoreToRedis, setScoreToSQL, coverScoreToSQL, addScoreToSQL, createScoreField
 }
