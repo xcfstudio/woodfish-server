@@ -1,0 +1,15 @@
+# Redis中db存放内容的约定
+
+```ts
+// dbnumber范围丛0～15，用来间隔不同种类的数据
+redisClient.select(dbnumber)
+```
+
+## db0
+存放排行榜数据
+
+## db1
+存放被ban的token
+
+## db2
+存放uid: username对照数据
