@@ -6,13 +6,11 @@ import dayjs from "dayjs";
 import { Middleware } from "koa";
 import { getScoreFromRedis } from "../../WoodFish/utils/getScore";
 
-interface RankingItem {
-    uid: string
-    username: string
-    score: number | null
-    ranking: number
-}
-
+import RankingItem from '../interfaces/RankingItem.interface'
+/**
+ * 排行榜-日榜
+ * @param ctx 
+ */
 const dailyRanking: Middleware = async ctx => {
     // 这个挺消耗性能的，需要缓存
     await redisClient.select(0)

@@ -5,7 +5,11 @@ import { getScoreFromRedis, getScoreFromSQL } from "../utils/getScore";
 import { createScoreField, setScoreToRedis } from "../utils/setScore";
 import { Success } from "@/classes/BasicResponse.class";
 
-
+/**
+ * 敲木鱼
+ * @param ctx 
+ * @returns 
+ */
 const knockWoodfish: Middleware = async ctx => {
     const uid = ctx.state.user.uid
     // const uid = '12333'
