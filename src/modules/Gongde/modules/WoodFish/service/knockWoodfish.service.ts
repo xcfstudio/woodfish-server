@@ -29,7 +29,7 @@ const knockWoodfish: Middleware = async ctx => {
     }
     v++
     await setScoreToRedis(uid, v)
-    ctx.body = new Success('done', {score: v})
+    ctx.body = new Success('done', {todayScore: v})
     
     // await redisClient.zAdd(`${dayjs().format('YYYY-MM-DD')}:ranking`, {value: Date.now().toString(), score: Date.now()})
    

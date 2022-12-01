@@ -5,7 +5,7 @@ const security_config = {
     saltRounds: 5,
     // token过期时间
     tokenExp: {
-        access: 1800,
+        access: 3600,
         refresh: 3600 * 24 * 7
     }
 }
