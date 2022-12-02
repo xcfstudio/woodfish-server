@@ -26,7 +26,7 @@ const knockWoodfish: Middleware = async ctx => {
             return
         } else {
             // 初始化sql中的数值为1
-            await createScoreField(uid, 1)
+            await createScoreField(uid, 0)
             ctx.body = new Success('done', {score: 1})
             return
         }

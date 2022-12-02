@@ -7,6 +7,7 @@ import { Middleware } from "koa";
 import RankingItem from '../interfaces/RankingItem.interface'
 
 const totalRanking: Middleware = async ctx => {
+    // 这个费性能，必须缓存，缓存一天即可
     await redisClient.select(0)
     const cache = await redisClient.get('TotalRankingCache')
     if (cache) {
@@ -15,6 +16,7 @@ const totalRanking: Middleware = async ctx => {
         const res = await GongdeScore.findAll({
             attributes: ['woodfish'],
             order: [
+                // 降序排列
                 ['woodfish', 'DESC']
             ],
             limit: 200,
