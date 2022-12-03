@@ -14,4 +14,8 @@ router.get('/score', getScoreService)
 import getTodayScoreService from './service/getTodayScore.service'
 router.get('/todayscore', getTodayScoreService)
 
+// 获取今日功德值、总功德值、今日排名、总排名
+import getBasicInfo from './service/getBasicInfo.service'
+router.get('/basicinfo', getBasicInfo)
+
 export default router

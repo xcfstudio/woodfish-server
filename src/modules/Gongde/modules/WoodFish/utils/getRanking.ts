@@ -1,0 +1,48 @@
+import sequelize from "@/core/ORM/sequelize"
+import { redisClient } from "@/core/REDIS/Redis"
+import { performance_config } from "config/performance"
+import dayjs from "dayjs"
+
+const getTotalRanking = async (uid: string) => {
+
+    // 单个用户排名耗费性能 需要缓存 缓存时间在配置文件
+    await redisClient.select(0)
+    const rankingCache = await redisClient.get(uid)
+    if (rankingCache) {
+        return parseInt(rankingCache)
+    }
+
+    try {
+        const res: any = await sequelize.query(
+            `SELECT RANK_NUM FROM (SELECT Rank() OVER (ORDER BY GongdeScore.woodfish DESC) AS RANK_NUM,uid,woodfish FROM GongdeScore ) AS T WHERE uid=${sequelize.escape(uid)};`
+        )
+        const ranking = res[0][0].RANK_NUM as number
+        await redisClient.select(0)
+        redisClient.set(uid, ranking.toString(), {
+            EX: performance_config.rankingCacheTime.singleTotal
+        })
+        return ranking
+    } catch (error) {
+        return null
+    }
+}
+
+
+const getTodayRanking = async (uid: string) => {
+    await redisClient.select(0)
+    let r = await redisClient.zRank(`${dayjs().format('YYYY-MM-DD')}:ranking`, uid)
+    console.log(r)
+    if (r !== null) {
+        r ++
+        return r
+    } else {
+        return null
+    }
+    
+   
+}
+
+
+export {
+    getTotalRanking, getTodayRanking
+}

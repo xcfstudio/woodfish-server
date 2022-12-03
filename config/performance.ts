@@ -6,7 +6,9 @@ const performance_config = {
         // 日榜
         daily: 300,
         // 总榜
-        total: 60 * 60 * 24 - 60
+        total: 60 * 60 * 24 - 60,
+        // 单用户总排名缓存时间
+        singleTotal: 60 * 60 * 2
     },
     // redis中uid与username键值缓存时间
     usernameCacheTime: 120

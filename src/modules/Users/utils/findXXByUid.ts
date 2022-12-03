@@ -1,5 +1,6 @@
 import { redisClient } from "@/core/REDIS/Redis"
 import { UserAccount } from "@/models/UserAccount"
+import { UserInfo } from "@/models/UserInfo"
 import { performance_config } from "config/performance"
 
 const findUsernameByUid = async (uid: string) => {
@@ -31,6 +32,16 @@ const findUsernameByUid = async (uid: string) => {
 
 }
 
+const findAvatarByUid = async (uid: string) => {
+   const res = await UserInfo.findOne({
+    attributes: ['avatar'],
+    where: {
+        uid
+    }
+   })
+   return res?.toJSON().avatar
+}
+
 export {
-    findUsernameByUid
+    findUsernameByUid, findAvatarByUid
 }

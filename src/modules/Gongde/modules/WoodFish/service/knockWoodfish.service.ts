@@ -18,7 +18,8 @@ const knockWoodfish: Middleware = async ctx => {
     console.log(v)
     if (!v) {
         // 若redis中无功德数据则读取sql中的功德数据
-        v = (await getScoreFromSQL(uid))?.toJSON().woodfish || null
+        const v = await getScoreFromSQL(uid)
+       
         if (v) {
             // sql中读取到功德值后缓存入redis
             await setScoreToRedis(uid, v)
