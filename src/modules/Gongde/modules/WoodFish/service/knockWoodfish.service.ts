@@ -15,7 +15,7 @@ const knockWoodfish: Middleware = async ctx => {
     // const uid = '12333'
     // 获取redis中的功德值（根据uid）
     let v:any = await getScoreFromRedis(uid)
-    console.log(v)
+    // console.log(v)
     if (!v) {
         // 若redis中无功德数据则读取sql中的功德数据
         const v = await getScoreFromSQL(uid)

@@ -3,7 +3,7 @@ import sequelize from "@/core/ORM/sequelize"
 import { user_config } from "config/user"
 import { UserAccount } from "./UserAccount"
 
-// 用户个人信息模型，存储用户个人信息相关数据
+// 用户反馈信息模型，存储用户个人信息相关数据
 
 const initOptions: ModelAttributes = {
     tid: {
@@ -16,22 +16,26 @@ const initOptions: ModelAttributes = {
     uid: {
         type: DataTypes.STRING(user_config.uidLength),
         allowNull: false,
-        unique: true
     },
-    woodfish: {
-        type: DataTypes.INTEGER
+    feedbackContent: {
+        type: DataTypes.TEXT({length: 'medium'}),
+        allowNull: false
     },
-    donate: {
-        type: DataTypes.INTEGER
+    telNumber: {
+        type: DataTypes.STRING(13)
+    },
+    qqNumber: {
+        type: DataTypes.STRING(15)
     }
+    
 }
 
-console.log('已载入 -- GongdeScore模型')
+console.log('已载入 -- Feedback模型')
 
-const GongdeScore = sequelize.define('GongdeScore', initOptions, {
+const Feedback = sequelize.define('Feedback', initOptions, {
     freezeTableName: true
 })
 
 
 
-export { GongdeScore, initOptions } 
+export { Feedback, initOptions } 

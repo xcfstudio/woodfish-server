@@ -14,8 +14,8 @@ interface DoubleToken {
  * @returns 
  */
 const generateToken = (payload: JwtPayload): DoubleToken => {
-    const accesstoken = jwt.sign({...payload, type: 'access'}, secretKeys.secretKey, {expiresIn: security_config.tokenExp.access, algorithm: 'HS256'})
-    const refreshtoken = jwt.sign({...payload, type: 'refresh'} , secretKeys.secretKey, {expiresIn: security_config.tokenExp.refresh, algorithm: 'HS256'})
+    const accesstoken = jwt.sign({...payload, type: 'access'}, secretKeys.secretKey, {expiresIn: security_config.tokenExp.access * 1000, algorithm: 'HS256'})
+    const refreshtoken = jwt.sign({...payload, type: 'refresh'} , secretKeys.secretKey, {expiresIn: security_config.tokenExp.refresh * 1000, algorithm: 'HS256'})
     return {
         accesstoken, refreshtoken
     }

@@ -32,7 +32,7 @@ const findUsernameByUid = async (uid: string) => {
 
 }
 
-const findAvatarByUid = async (uid: string) => {
+const findAvatarByUid = async (uid: string): Promise<string | null> => {
    const res = await UserInfo.findOne({
     attributes: ['avatar'],
     where: {

@@ -3,6 +3,8 @@ import sequelize from "@/core/ORM/sequelize"
 import { hashSync } from "@/utils/hash"
 import { user_config } from "config/user"
 import { UserInfo } from "./UserInfo"
+import { GongdeScore } from "./GongdeScore"
+import { Feedback } from "./Feedback"
 
 // 用户账户模型，存储用户登陆相关数据
 
@@ -49,6 +51,14 @@ const UserAccount = sequelize.define('UserAccount', initOptions, {
 UserAccount.hasOne(UserInfo, {
     foreignKey: 'uid'
 })
+
+// UserAccount.hasOne(GongdeScore, {
+//     foreignKey: 'uid'
+// })
+
+// UserAccount.hasOne(Feedback, {
+//     foreignKey: 'uid'
+// })
 
 console.log('已载入 -- UserAccount模型')
 

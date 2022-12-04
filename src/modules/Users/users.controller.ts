@@ -36,6 +36,10 @@ import logoutService from './service/logout.service'
 router.use('/logout', jwtVerifyFactory())
 router.post('/logout', logoutService)
 
+// 根据用户account获取头像
+import getAvatarService from './service/getAvatar.service'
+router.get('/avatar/:id', getAvatarService)
+
 // @Module
 // EXIST CHECK
 // 核查手机号、邮箱等是否已经被注册
