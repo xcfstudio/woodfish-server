@@ -9,8 +9,8 @@ import { verifyTokenString } from "../../../utils/verifyRegex"
  */
 const tokenFilter = async (jwtToken: string) => {
     const tokenSign = jwtToken.split('.')[2]
-    await redisClient.select(1)
-    return await redisClient.get(tokenSign)
+    // await redisClient.select(1)
+    return await redisClient.get(`${tokenSign}:TOKEN`)
 }
 
 /**
@@ -22,8 +22,8 @@ const addTokenToBlacklist = async (jwtToken: string) => {
     
     if (!verifyTokenString(jwtToken)) return 'err'
     const tokenSign = jwtToken.split('.')[2]
-    await redisClient.select(1)
-    return await redisClient.set(tokenSign, 'b', {
+    // await redisClient.select(1)
+    return await redisClient.set(`${tokenSign}:TOKEN`, 'b', {
         EX: security_config.tokenExp.refresh
     })
 }

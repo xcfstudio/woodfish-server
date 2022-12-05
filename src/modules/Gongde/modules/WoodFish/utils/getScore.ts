@@ -1,5 +1,6 @@
 import { redisClient } from "@/core/REDIS/Redis"
 import { GongdeScore } from "@/models/GongdeScore"
+import { performance_config } from "config/performance"
 import dayjs from 'dayjs'
 
 /**
@@ -8,8 +9,14 @@ import dayjs from 'dayjs'
  * @returns 
  */
 const getScoreFromRedis = async (uid: string) => {
-    await redisClient.select(0)
-    return await redisClient.zScore(`${dayjs().format('YYYY-MM-DD')}:ranking`, uid)
+   
+    // const r =  await redisClient.zScore(`${dayjs().format('YYYY-MM-DD')}:ranking`, uid)
+    const k = `${dayjs().format('YYYY-MM-DD')}:ranking`
+    // await redisClient.select(0)
+    const r =  await redisClient.zScore(k, uid)
+    // const r =  666
+    console.log(r, k, uid)
+    return r
 }
 
 /**
@@ -18,13 +25,24 @@ const getScoreFromRedis = async (uid: string) => {
  * @returns 
  */
 const getScoreFromSQL = async (uid: string) => {
+    // 需要缓存
+    // await redisClient.select(3)
+    const cache = await redisClient.get(`${uid}:SQL_SCORE`)
+    if (cache) {
+        return parseInt(cache)
+    }
     const res = await GongdeScore.findOne({
         attributes: ['woodfish'],
         where: {
             uid
         }
     })
-    return res?.toJSON().woodfish
+    const gd = res?.toJSON().woodfish
+    // await redisClient.select(3)
+    redisClient.set(`${uid}:SQL_SCORE`, gd, {
+        EX: performance_config.userTotalScoreCacheTime
+    })
+    return gd
 }
 
 

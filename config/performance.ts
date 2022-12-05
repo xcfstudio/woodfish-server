@@ -11,7 +11,9 @@ const performance_config = {
         singleTotal: 60 * 60 * 2
     },
     // redis中uid与username键值缓存时间
-    usernameCacheTime: 120
+    usernameCacheTime: 120,
+    // redis中缓存用户总功德（来自SQL）的时间
+    userTotalScoreCacheTime: 3600 * 5
 }
 
 export {

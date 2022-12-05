@@ -30,12 +30,14 @@ const knockWoodfishUpScoreService: Middleware = async ctx => {
     console.log(error)
    }
 
+   
+
 
     const uid = ctx.state.user.uid
     const submitScore = body.score
     // const uid = '12333'
     // 获取redis中的功德值（根据uid）
-    let v:any = await getScoreFromRedis(uid)
+    let v = await getScoreFromRedis(uid)
     // console.log(v)
     if (!v) {
         // // 若redis中无功德数据则读取sql中的功德数据

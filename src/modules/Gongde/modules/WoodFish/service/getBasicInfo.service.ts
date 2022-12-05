@@ -4,9 +4,12 @@ import { getTodayRanking, getTotalRanking } from "../utils/getRanking";
 import { getScoreFromRedis, getScoreFromSQL } from "../utils/getScore";
 
 const getBasicInfoService: Middleware = async ctx => {
+
+
     const uid = ctx.state.user.uid as string
     const username = ctx.state.user.username as string
 
+    console.log('------', uid)
     const todayScore = (await getScoreFromRedis(uid)) || 0
     const totalScore = (await getScoreFromSQL(uid)) + todayScore
     const todayRanking = (await getTodayRanking(uid)) || '--'

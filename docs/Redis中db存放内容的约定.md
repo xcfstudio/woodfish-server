@@ -14,3 +14,6 @@ redisClient.select(dbnumber)
 
 ## db2
 存放uid: username对照数据(uid: username)
+
+## db3
+存放用户累计功德（SQL）缓存（uid: totalGongde）

@@ -9,7 +9,7 @@ import { getScoreFromSQL } from "./getScore";
  * @param score 
  */
 const setScoreToRedis = async (uid: string, score: number) => {
-    await redisClient.select(0)
+    // await redisClient.select(0)
     await redisClient.zAdd(`${dayjs().format('YYYY-MM-DD')}:ranking`, {value: uid, score })
 }
 

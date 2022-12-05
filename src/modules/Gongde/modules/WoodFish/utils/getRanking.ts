@@ -6,8 +6,8 @@ import dayjs from "dayjs"
 const getTotalRanking = async (uid: string) => {
 
     // 单个用户排名耗费性能 需要缓存 缓存时间在配置文件
-    await redisClient.select(0)
-    const rankingCache = await redisClient.get(uid)
+    // await redisClient.select(0)
+    const rankingCache = await redisClient.get(`${uid}:SINGLE_RANKING`)
     if (rankingCache) {
         return parseInt(rankingCache)
     }
@@ -17,8 +17,8 @@ const getTotalRanking = async (uid: string) => {
             `SELECT RANK_NUM FROM (SELECT Rank() OVER (ORDER BY GongdeScore.woodfish DESC) AS RANK_NUM,uid,woodfish FROM GongdeScore ) AS T WHERE uid=${sequelize.escape(uid)};`
         )
         const ranking = res[0][0].RANK_NUM as number
-        await redisClient.select(0)
-        redisClient.set(uid, ranking.toString(), {
+        // await redisClient.select(0)
+        redisClient.set(`${uid}:SINGLE_RANKING`, ranking.toString(), {
             EX: performance_config.rankingCacheTime.singleTotal
         })
         return ranking
@@ -29,7 +29,7 @@ const getTotalRanking = async (uid: string) => {
 
 
 const getTodayRanking = async (uid: string) => {
-    await redisClient.select(0)
+    // await redisClient.select(0)
     const totalMem = await redisClient.zCard(`${dayjs().format('YYYY-MM-DD')}:ranking`) || 0
     let r = await redisClient.zRank(`${dayjs().format('YYYY-MM-DD')}:ranking`, uid)
     // console.log(r)

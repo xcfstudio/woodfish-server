@@ -13,7 +13,7 @@ const syncRedisYesterdayScoreToSQL = async () => {
     // const today = dayjs().format('YYYY-MM-DD')
     const yesterday = dayjs().subtract(1, 'day').format('YYYY-MM-DD')
     
-    await redisClient.select(0)
+    // await redisClient.select(0)
     // 获取昨日redis排行榜数据
     // 异步迭代器
     const yesterday_ranking = redisClient.zScanIterator(`${yesterday}:ranking`)

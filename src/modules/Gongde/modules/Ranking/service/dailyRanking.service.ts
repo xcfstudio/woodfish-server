@@ -13,12 +13,12 @@ import RankingItem from '../interfaces/RankingItem.interface'
  */
 const dailyRanking: Middleware = async ctx => {
     // 这个挺消耗性能的，需要缓存
-    await redisClient.select(0)
+    // await redisClient.select(0)
     const cache = await redisClient.get('DailyRankingCache')
     if (cache) {
         ctx.body = new Success('done', JSON.parse(cache))
     } else {
-        await redisClient.select(0)
+        // await redisClient.select(0)
         const totalNum = await redisClient.zCard(`${dayjs().format('YYYY-MM-DD')}:ranking`)
         const res = await redisClient.zRange(`${dayjs().format('YYYY-MM-DD')}:ranking`, totalNum + 1 -199, totalNum + 1)
         const rankingList: RankingItem[] = []
