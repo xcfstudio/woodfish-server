@@ -5,6 +5,7 @@ interface RankingItemInterface {
     username: string
     score: number | null
     ranking: number
+    avatar: string | null
 }
 
 export default RankingItemInterface

@@ -1,6 +1,6 @@
 import { Success } from "@/classes/BasicResponse.class";
 import { redisClient } from "@/core/REDIS/Redis";
-import { findUsernameByUid } from "@/modules/Users/utils/findXXByUid";
+import { findAvatarByUid, findUsernameByUid } from "@/modules/Users/utils/findXXByUid";
 import { performance_config } from "config/performance";
 import dayjs from "dayjs";
 import { Middleware } from "koa";
@@ -25,9 +25,11 @@ const dailyRanking: Middleware = async ctx => {
         let rankingStart = res.length
         for (let uid of res) {
             const username = await findUsernameByUid(uid)
+            const avatar = await findAvatarByUid(uid)
             const score = await getScoreFromRedis(uid)
             rankingList.unshift({
                 uid,
+                avatar,
                 username,
                 score,
                 ranking: rankingStart
