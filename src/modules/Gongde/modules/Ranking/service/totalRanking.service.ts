@@ -21,7 +21,7 @@ const totalRanking: Middleware = async ctx => {
             ],
             limit: 200,
             include: {
-                model: UserAccount,
+                association: GongdeScore.belongsTo(UserAccount, {foreignKey: 'uid'}),
                 attributes: ['uid', 'username'],
 
             }

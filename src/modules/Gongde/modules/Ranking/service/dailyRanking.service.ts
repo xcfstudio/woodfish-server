@@ -19,19 +19,20 @@ const dailyRanking: Middleware = async ctx => {
         ctx.body = new Success('done', JSON.parse(cache))
     } else {
         await redisClient.select(0)
-        const res = await redisClient.zRange(`${dayjs().format('YYYY-MM-DD')}:ranking`, 0, 199)
+        const totalNum = await redisClient.zCard(`${dayjs().format('YYYY-MM-DD')}:ranking`)
+        const res = await redisClient.zRange(`${dayjs().format('YYYY-MM-DD')}:ranking`, totalNum + 1 -199, totalNum + 1)
         const rankingList: RankingItem[] = []
-        let rankingStart = 1
+        let rankingStart = res.length
         for (let uid of res) {
             const username = await findUsernameByUid(uid)
             const score = await getScoreFromRedis(uid)
-            rankingList.push({
+            rankingList.unshift({
                 uid,
                 username,
                 score,
                 ranking: rankingStart
             })
-            rankingStart++
+            rankingStart--
         }
         redisClient.set('DailyRankingCache', JSON.stringify(rankingList), {
             EX: performance_config.rankingCacheTime.daily
