@@ -30,11 +30,12 @@ const getTotalRanking = async (uid: string) => {
 
 const getTodayRanking = async (uid: string) => {
     await redisClient.select(0)
+    const totalMem = await redisClient.zCard(`${dayjs().format('YYYY-MM-DD')}:ranking`) || 0
     let r = await redisClient.zRank(`${dayjs().format('YYYY-MM-DD')}:ranking`, uid)
-    console.log(r)
+    // console.log(r)
     if (r !== null) {
-        r ++
-        return r
+        
+        return totalMem - r
     } else {
         return null
     }

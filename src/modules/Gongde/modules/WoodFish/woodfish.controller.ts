@@ -6,6 +6,10 @@ const router = new Router()
 import knockWoodfishService from './service/knockWoodfish.service'
 router.post('/knock', knockWoodfishService)
 
+// 敲木鱼（直接上传分数)
+import knockWoodfishUpScoreServie from './service/knockWoodfishUpScore.service'
+router.post('/knock2', knockWoodfishUpScoreServie)
+
 // 获取总功德值
 import getScoreService from './service/getScore.service'
 router.get('/score', getScoreService)

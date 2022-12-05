@@ -287,6 +287,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/totp-generator@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.npmmirror.com/@types/totp-generator/-/totp-generator-0.0.4.tgz#c8fed6d37b7ff9b3b689ca802359332def92603b"
+  integrity sha512-rs5nfg//Q6zXGRiIqZ6UUhh65lBgEM5/s8knGw3fO2TBa0i1GlSLx4+P45vXNTrp3uNnqdSS1z4I33Oi3egDDg==
+
 "@types/validator@^13.7.1":
   version "13.7.10"
   resolved "https://registry.npmmirror.com/@types/validator/-/validator-13.7.10.tgz#f9763dc0933f8324920afa9c0790308eedf55ca7"
@@ -883,6 +888,11 @@ jsonwebtoken@^8.5.1:
     lodash.once "^4.0.0"
     ms "^2.1.1"
     semver "^5.6.0"
+
+jssha@^3.1.2:
+  version "3.3.0"
+  resolved "https://registry.npmmirror.com/jssha/-/jssha-3.3.0.tgz#44b5531bcf55a12f4a388476c647a9a1cca92839"
+  integrity sha512-w9OtT4ALL+fbbwG3gw7erAO0jvS5nfvrukGPMWIAoea359B26ALXGpzy4YJSp9yGnpUvuvOw1nSjSoHDfWSr1w==
 
 jwa@^1.4.1:
   version "1.4.1"
@@ -1532,6 +1542,13 @@ toposort-class@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmmirror.com/toposort-class/-/toposort-class-1.0.1.tgz#7ffd1f78c8be28c3ba45cd4e1a3f5ee193bd9988"
   integrity sha512-OsLcGGbYF3rMjPUf8oKktyvCiUxSbqMMS39m33MAjLTC1DVIH6x3WSt63/M77ihI09+Sdfk1AXvfhCEeUmC7mg==
+
+totp-generator@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.npmmirror.com/totp-generator/-/totp-generator-0.0.14.tgz#c136bcb4030f9cab5b10ecd82d15cd2d5518234a"
+  integrity sha512-vFZ8N2TdF4mCj8bUW460jI73LqS+JKccsZ8cttQSuXa3dkTmZo8q81Pq2yAuiPxCI5fPfUrfaKuU+7adjx5s4w==
+  dependencies:
+    jssha "^3.1.2"
 
 touch@^3.1.0:
   version "3.1.0"
