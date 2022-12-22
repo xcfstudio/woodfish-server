@@ -37,7 +37,8 @@ const getAvatarService: Middleware = async ctx => {
         },
         include: [
             {
-                model: UserInfo,
+                // model: UserInfo,
+                association: UserAccount.hasOne(UserInfo, {foreignKey: 'uid'}),
                 attributes: ['avatar']
             }
         ]

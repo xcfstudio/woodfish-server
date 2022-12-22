@@ -48,9 +48,9 @@ const UserAccount = sequelize.define('UserAccount', initOptions, {
 })
 
 
-UserAccount.hasOne(UserInfo, {
-    foreignKey: 'uid'
-})
+// UserAccount.hasOne(UserInfo, {
+//     foreignKey: 'uid'
+// })
 
 // UserAccount.hasOne(GongdeScore, {
 //     foreignKey: 'uid'

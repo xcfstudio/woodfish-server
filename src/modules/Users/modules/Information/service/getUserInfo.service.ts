@@ -11,10 +11,10 @@ const getUserInfo: Middleware = async ctx => {
             uid
         },
         // 联表查询
-        include: [{
-            model: UserInfo,
+        include: {
+            association: UserAccount.hasOne(UserInfo, {foreignKey: 'uid'}),
             attributes: ['avatar', 'qqnumber', 'realname', 'gender', 'birthday', 'age', 'province', 'city']
-        }]
+        }
     })
     
     if (res) {

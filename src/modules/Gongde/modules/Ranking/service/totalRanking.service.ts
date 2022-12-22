@@ -4,6 +4,7 @@ import { GongdeScore } from "@/models/GongdeScore";
 import { UserAccount } from "@/models/UserAccount";
 import { findAvatarByUid } from "@/modules/Users/utils/findXXByUid";
 import { performance_config } from "config/performance";
+import { user_config } from "config/user";
 import { Middleware } from "koa";
 import RankingItem from '../interfaces/RankingItem.interface'
 
@@ -20,7 +21,7 @@ const totalRanking: Middleware = async ctx => {
                 // 降序排列
                 ['woodfish', 'DESC']
             ],
-            limit: 200,
+            limit: user_config.rankingCount.total,
             include: {
                 association: GongdeScore.belongsTo(UserAccount, {foreignKey: 'uid'}),
                 attributes: ['uid', 'username'],

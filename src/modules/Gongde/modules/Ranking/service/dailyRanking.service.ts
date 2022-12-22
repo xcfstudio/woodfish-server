@@ -2,6 +2,7 @@ import { Success } from "@/classes/BasicResponse.class";
 import { redisClient } from "@/core/REDIS/Redis";
 import { findAvatarByUid, findUsernameByUid } from "@/modules/Users/utils/findXXByUid";
 import { performance_config } from "config/performance";
+import { user_config } from "config/user";
 import dayjs from "dayjs";
 import { Middleware } from "koa";
 import { getScoreFromRedis } from "../../WoodFish/utils/getScore";
@@ -20,7 +21,7 @@ const dailyRanking: Middleware = async ctx => {
     } else {
         // await redisClient.select(0)
         const totalNum = await redisClient.zCard(`${dayjs().format('YYYY-MM-DD')}:ranking`)
-        const res = await redisClient.zRange(`${dayjs().format('YYYY-MM-DD')}:ranking`, totalNum + 1 -199, totalNum + 1)
+        const res = await redisClient.zRange(`${dayjs().format('YYYY-MM-DD')}:ranking`, totalNum + 1 -(user_config.rankingCount.today - 1), totalNum + 1)
         const rankingList: RankingItem[] = []
         let rankingStart = res.length
         for (let uid of res) {

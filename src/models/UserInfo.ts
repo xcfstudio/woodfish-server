@@ -18,7 +18,8 @@ const initOptions: ModelAttributes = {
         unique: true
     },
     avatar: {
-        type: STRING
+        type: STRING,
+        defaultValue: "https://s1.ax1x.com/2022/12/06/z62mSx.jpg"
     },
     qqNumber: {
         type: STRING(20)
