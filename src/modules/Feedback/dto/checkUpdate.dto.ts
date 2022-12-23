@@ -1,15 +1,17 @@
 import Dto from "@/classes/Dto.class";
-import { IsString, MaxLength } from "class-validator";
+import { IsString } from "class-validator";
 
-class FeedbackDto extends Dto {
+class CheckUpdateDto extends Dto {
+    @IsString()
     platform: string
+    @IsString()
     version: string
 
-    constructor(body: FeedbackDto) {
+    constructor(body: CheckUpdateDto) {
         super()
         this.platform = body.platform
         this.version = body.version
     }
 }
 
-export default FeedbackDto
+export default CheckUpdateDto
