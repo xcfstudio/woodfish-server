@@ -39,7 +39,7 @@ const getScoreFromSQL = async (uid: string) => {
     })
     const gd = res?.toJSON().woodfish
     // await redisClient.select(3)
-    redisClient.set(`${uid}:SQL_SCORE`, gd, {
+    redisClient.set(`${uid}:SQL_SCORE`, String(gd), {
         EX: performance_config.userTotalScoreCacheTime
     })
     return gd

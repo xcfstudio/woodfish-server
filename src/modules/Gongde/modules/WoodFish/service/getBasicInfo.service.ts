@@ -10,10 +10,12 @@ const getBasicInfoService: Middleware = async ctx => {
     const username = ctx.state.user.username as string
 
     console.log('------', uid)
+   try {
     const todayScore = (await getScoreFromRedis(uid)) || 0
-    const totalScore = (await getScoreFromSQL(uid)) + todayScore
-    const todayRanking = (await getTodayRanking(uid)) || '--'
-    const totalRanking = await getTotalRanking(uid)
+    const totalScore = (await getScoreFromSQL(uid)) + todayScore || 0
+    const todayRanking = (await getTodayRanking(uid)) || 0
+    const totalRanking = await getTotalRanking(uid) || 0
+
     const basicInfo = {
         uid,
         username,
@@ -24,6 +26,11 @@ const getBasicInfoService: Middleware = async ctx => {
     }
 
     ctx.body = new Success('done', basicInfo)
+
+   } catch (error) {
+    console.log(error)
+   }
+   
 }
 
 export default getBasicInfoService
