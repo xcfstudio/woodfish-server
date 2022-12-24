@@ -1,4 +1,5 @@
 import { Success } from "@/classes/BasicResponse.class";
+import { findUsernameByUid } from "@/modules/Users/utils/findXXByUid";
 import { Middleware } from "koa";
 import { getTodayRanking, getTotalRanking } from "../utils/getRanking";
 import { getScoreFromRedis, getScoreFromSQL } from "../utils/getScore";
@@ -7,7 +8,8 @@ const getBasicInfoService: Middleware = async ctx => {
 
 
     const uid = ctx.state.user.uid as string
-    const username = ctx.state.user.username as string
+    // const username = ctx.state.user.username as string
+    const username = await findUsernameByUid(uid)
 
     // console.log('------', uid)
    try {

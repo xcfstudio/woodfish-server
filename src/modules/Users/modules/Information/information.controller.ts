@@ -10,4 +10,8 @@ router.put('/', updateUserInfo)
 import getAvatarService from './service/getAvatar.service'
 router.get('/avatar', getAvatarService)
 
+import setQQavatar from './service/setQQavatar.service'
+import { jwtVerifyFactory } from '@/middlewares/jwtVerify'
+router.post('/qqavatar', jwtVerifyFactory(), setQQavatar)
+
 export default router

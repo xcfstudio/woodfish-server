@@ -35,7 +35,7 @@ const changePassword: Middleware = async ctx => {
 
 
         // 生成新token
-        ctx.body = new Success('Password changed!', {
+        ctx.body = new Success('修改成功！', {
             username: res.username,
             uid: res.uid,
             token: generateToken({
@@ -48,7 +48,7 @@ const changePassword: Middleware = async ctx => {
         
         return
     }
-    ctx.body = new Failure('Old password wrong!')
+    ctx.body = new Failure('原密码错误！')
 }
 
 export default changePassword

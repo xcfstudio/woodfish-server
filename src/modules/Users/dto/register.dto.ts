@@ -4,9 +4,8 @@ import { IsEmail, IsNotEmpty, IsPhoneNumber } from 'class-validator'
 class RegisterDto extends Dto {
    
     @IsEmail()
-    @IsNotEmpty()
     useremail: string
-    @IsPhoneNumber()
+    // @IsPhoneNumber()
     userphone?: string
     @IsNotEmpty()
     password: string

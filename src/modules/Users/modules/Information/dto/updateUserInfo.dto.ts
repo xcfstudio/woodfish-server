@@ -3,22 +3,24 @@ import { IsInt, IsString } from "class-validator";
 import { threadId } from "worker_threads";
 
 class UpdateUserInfoDto extends Dto {
-    @IsString()
+    // @IsString()
     avatar?: string
-    @IsString()
+    // @IsString()
     qqNumber?: string
-    @IsString()
+    // @IsString()
     realName?: string
-    @IsString()
+    // @IsString()
     gender?: string
-    @IsString()
+    // @IsString()
     birthday?: string
-    @IsInt()
+    // @IsInt()
     age?: number
-    @IsString()
+    // @IsString()
     province?: string
-    @IsString()
+    // @IsString()
     city?: string
+
+    username?: string
 
    
     constructor(body: UpdateUserInfoDto) {

@@ -15,14 +15,15 @@ const checkUpdate: Middleware = async ctx => {
 
     let res = (await AppVersion.findOne({
         where: {
-            platform: body.platform
+            platform: body.platform,
+            publish: true
         }
     }))?.toJSON()
 
     const resp_obj_none = new Success('当前版本已最新', {
         update: false
     })
-        
+
 
     if (res && res.version) {
         const resp_obj_new = new Success('有新版本', {
@@ -33,8 +34,8 @@ const checkUpdate: Middleware = async ctx => {
             date: res.date
         })
 
-        let versionArr_client:any = []
-        let versionArr_server:any = []
+        let versionArr_client: any = []
+        let versionArr_server: any = []
         try {
             versionArr_client = body.version.split('.')
             versionArr_server = res.version.split('.')
@@ -42,23 +43,24 @@ const checkUpdate: Middleware = async ctx => {
             ctx.body = resp_obj_none
             return
         }
-        if (versionArr_client[0] < versionArr_server[0]) {
-            ctx.body = resp_obj_new
+        if (versionArr_client[0] > versionArr_server[0]) {
+            ctx.body = resp_obj_none
             return
         }
-        if (versionArr_client[1] < versionArr_server[1]) {
-            ctx.body = resp_obj_new
+        if ((versionArr_client[0] = versionArr_server[0]) && (versionArr_client[1] > versionArr_server[1])) {
+            ctx.body = resp_obj_none
             return
         }
-        if (versionArr_client[2] < versionArr_server[2]) {
-            ctx.body = resp_obj_new
+        if ((versionArr_client[0] = versionArr_server[0]) && (versionArr_client[1] = versionArr_server[1]) && (versionArr_client[2] >= versionArr_server[2])) {
+            ctx.body = resp_obj_none
             return
         }
-        ctx.body = resp_obj_none
+
+        ctx.body = resp_obj_new
         return
     }
 
-    
+
     ctx.body = resp_obj_none
 }
 
