@@ -5,31 +5,34 @@ import { Middleware } from "koa";
 import CheckUpdateDto from "../dto/checkUpdate.dto";
 
 const checkUpdate: Middleware = async ctx => {
-    const body = ctx.body as CheckUpdateDto
+    const body = ctx.request.body as CheckUpdateDto
+    console.log(body)
     const err = await validateBodyDto(new CheckUpdateDto(body))
     if (err) {
         ctx.body = new Failure('validate error!', {}, err)
         return
     }
 
-    const res = (await AppVersion.findOne({
+    let res = (await AppVersion.findOne({
         where: {
             platform: body.platform
         }
     }))?.toJSON()
 
-    const resp_obj_new = new Success('有新版本', {
-        update: true,
-        link: res.link,
-        version: res.version,
-        details: res.details,
-        date: res.date
-    })
     const resp_obj_none = new Success('当前版本已最新', {
         update: false
     })
+        
 
     if (res && res.version) {
+        const resp_obj_new = new Success('有新版本', {
+            update: true,
+            link: res.link,
+            version: res.version,
+            details: res.details,
+            date: res.date
+        })
+
         let versionArr_client:any = []
         let versionArr_server:any = []
         try {
@@ -54,6 +57,8 @@ const checkUpdate: Middleware = async ctx => {
         ctx.body = resp_obj_none
         return
     }
+
+    
     ctx.body = resp_obj_none
 }
 
