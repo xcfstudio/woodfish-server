@@ -6,7 +6,6 @@ import dayjs from "dayjs"
 const getTotalRanking = async (uid: string) => {
 
     // 单个用户排名耗费性能 需要缓存 缓存时间在配置文件
-    // await redisClient.select(0)
     const rankingCache = await redisClient.get(`${uid}:SINGLE_RANKING`)
     if (rankingCache) {
         return parseInt(rankingCache)
@@ -16,8 +15,9 @@ const getTotalRanking = async (uid: string) => {
         const res: any = await sequelize.query(
             `SELECT RANK_NUM FROM (SELECT Rank() OVER (ORDER BY GongdeScore.woodfish DESC) AS RANK_NUM,uid,woodfish FROM GongdeScore ) AS T WHERE uid=${sequelize.escape(uid)};`
         )
-        const ranking = res[0][0].RANK_NUM as number
-        // await redisClient.select(0)
+        console.log(res)
+        // const ranking = res[0][0].RANK_NUM || 0
+        const ranking = res[0][0] ? res[0][0].RANK_NUM : 0
         redisClient.set(`${uid}:SINGLE_RANKING`, ranking.toString(), {
             EX: performance_config.rankingCacheTime.singleTotal
         })

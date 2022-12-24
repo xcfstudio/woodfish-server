@@ -9,7 +9,7 @@ const getBasicInfoService: Middleware = async ctx => {
     const uid = ctx.state.user.uid as string
     const username = ctx.state.user.username as string
 
-    console.log('------', uid)
+    // console.log('------', uid)
    try {
     const todayScore = (await getScoreFromRedis(uid)) || 0
     const totalScore = (await getScoreFromSQL(uid)) + todayScore || 0

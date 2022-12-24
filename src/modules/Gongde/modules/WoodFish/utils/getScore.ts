@@ -15,7 +15,7 @@ const getScoreFromRedis = async (uid: string) => {
     // await redisClient.select(0)
     const r =  await redisClient.zScore(k, uid)
     // const r =  666
-    console.log(r, k, uid)
+    // console.log(r, k, uid)
     return r
 }
 
