@@ -65,7 +65,7 @@ const jwtVerifyFactory = (options?: JwtVerifyFactoryOptions): Middleware => {
             // console.log(ctx.header.authorization)
             await koaJwt({ secret: secretKeys.secretKey, algorithms: ['HS256'] })(ctx, next)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             ctx.body = new Failure('Authorization error!')
         }
     }

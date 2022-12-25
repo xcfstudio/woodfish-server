@@ -1,15 +1,26 @@
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import cors from '@koa/cors'
+import morgan from 'koa-morgan'
 const app = new Koa()
 
 
 import router_api from '@/routers/api'
 import onError from './middlewares/onError'
 import { startTask } from './core/TASK/index.task'
+import path from 'path'
+import fs from 'fs'
+
+const logPath = path.resolve(__dirname, '../', 'logs', 'access.log')
+const logStream = fs.createWriteStream(logPath, {flags: 'a'})
 
 // MIDDLEWARES
 app.use(onError)
+// 日志记录
+app.use(morgan('combined', {
+    stream: logStream
+}))
+//跨域
 app.use(cors())
 app.use(bodyParser({
     onerror: (err, ctx) => {
