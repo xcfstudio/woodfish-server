@@ -8,7 +8,7 @@ import { redisClient } from "../REDIS/Redis"
  * 把昨天日榜数据逐个刷入数据库
  */
 const syncRedisYesterdayScoreToSQL = async () => {
-    console.log('开始同步数据')
+    console.log(dayjs().format('YYYY:MM:DD:HH:mm:ss'),' 开始同步数据')
     
     // 获取昨天时间戳
     // const today = dayjs().format('YYYY-MM-DD')
@@ -23,6 +23,7 @@ const syncRedisYesterdayScoreToSQL = async () => {
     for await (const { score, value } of yesterday_ranking) {
         await addScoreToSQL(value, score)
     }
+    console.log(dayjs().format('YYYY:MM:DD:HH:mm:ss'),' 数据同步完成')
 }
 
 export default syncRedisYesterdayScoreToSQL
