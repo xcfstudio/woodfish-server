@@ -6,6 +6,7 @@ const app = new Koa()
 
 import router_api from '@/routers/api'
 import onError from './middlewares/onError'
+import { startTask } from './core/TASK/index.task'
 
 // MIDDLEWARES
 app.use(onError)
@@ -17,5 +18,7 @@ app.use(bodyParser({
 }))
 
 app.use(router_api.routes())
+
+startTask()
 
 export {app}
