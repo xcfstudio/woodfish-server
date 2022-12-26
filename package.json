@@ -9,7 +9,7 @@
     "dev": "cross-env ENV=development nodemon index.ts",
     "tscCompile": "tsc && tsc-alias",
     "build": "sh build.sh",
-    "production": "npm run build && cross-env ENV=production pm2 start ./dist/index.js -i 6 && cross-env ENV=production pm2 start ./dist/scheduleTask.js"
+    "production": "cross-env ENV=production pm2 start ./dist/index.js -i 6 && cross-env ENV=production pm2 start ./dist/scheduleTask.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

@@ -14,7 +14,7 @@ const getBasicInfoService: Middleware = async ctx => {
     // console.log('------', uid)
    try {
     const todayScore = (await getScoreFromRedis(uid)) || 0
-    const totalScore = (await getScoreFromSQL(uid)) + todayScore || 0
+    const totalScore = (await getScoreFromSQL(uid)) + todayScore 
     const todayRanking = (await getTodayRanking(uid)) || 0
     const totalRanking = await getTotalRanking(uid) || 0
 
