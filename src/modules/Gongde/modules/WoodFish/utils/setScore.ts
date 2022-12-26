@@ -50,6 +50,9 @@ const coverScoreToSQL = async (uid: string, score: number) => {
  */
 const addScoreToSQL = async (uid: string, score: number) => {
     let res = await getScoreFromSQL(uid) as unknown as number
+    if (res === 0) {
+        await createScoreField(uid, 0)
+    }
     res += score
     await coverScoreToSQL(uid, res)
 }
