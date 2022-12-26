@@ -14,6 +14,7 @@ import { startTask01 } from './core/TASK/index.task'
 const logPath = path.resolve(__dirname, '../', 'logs', 'access.log')
 const logStream = fs.createWriteStream(logPath, {flags: 'a'})
 
+console.log(`当前系统环境：${process.env.ENV}`)
 // MIDDLEWARES
 app.use(onError)
 // 日志记录
@@ -30,9 +31,8 @@ app.use(bodyParser({
 
 app.use(router_api.routes())
 
-import dev_config from '../config/dev'
 // 开发环境下直接运行定时任务
-if (!dev_config.env.production) {
+if (process.env.ENV === 'development') {
     startTask01()
 }
 
