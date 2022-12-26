@@ -7,9 +7,9 @@ const app = new Koa()
 
 import router_api from '@/routers/api'
 import onError from './middlewares/onError'
-import { startTask } from './core/TASK/index.task'
 import path from 'path'
 import fs from 'fs'
+import { startTask01 } from './core/TASK/index.task'
 
 const logPath = path.resolve(__dirname, '../', 'logs', 'access.log')
 const logStream = fs.createWriteStream(logPath, {flags: 'a'})
@@ -30,6 +30,10 @@ app.use(bodyParser({
 
 app.use(router_api.routes())
 
-startTask()
+import dev_config from '../config/dev'
+// 开发环境下直接运行定时任务
+if (!dev_config.env.production) {
+    startTask01()
+}
 
 export {app}
