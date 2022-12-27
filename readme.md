@@ -44,7 +44,9 @@ sh ./secretKey/genSecretKey.sh
 ```
   开发模式, 基于`nodemon`,  文件发生改动自动重启服务。配置文件在`项目根目录/nodemon.json`
 
-1. 同步模型: `GET`请求`/api/system/syncmodels`, 数秒后完成模型同步。此接口只能访问一次便锁定, 若需再次同步，需删除`项目根目录/tag/db.lock`
+**同步模型:**
+
+ `GET`请求`/api/system/syncmodels`, 数秒后完成模型同步。此接口只能访问一次便锁定, 若需再次同步，需删除`项目根目录/tag/db.lock`
 
 ### 编译
 ```shell
