@@ -2,7 +2,10 @@
 
 [![zzCq7d.png](https://s1.ax1x.com/2022/12/27/zzCq7d.png)](https://imgse.com/i/zzCq7d)
 
-
+## 关联前端项目
++ GitLab: https://gitlab.com/xcfstudio/woodfish-app
++ GitHub: https://github.com/xcfstudio/woodfish-app
++ Gitee: https://gitee.com/xcfstudio/woodfish-app
 
 ## 前言
 本项目是作者的创作型实验项目，旨在打造干净、清爽的小而美的应用。本项目主要功能是积分制敲木鱼，并进行排行，多用户在线敲木鱼功德系统， 基于Koa2开发。数据使用`MySQL`存储，`Redis`做缓存，提高性能。
