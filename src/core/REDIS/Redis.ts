@@ -1,7 +1,7 @@
 import { createClient } from 'redis'
-
+import redis_config from '../../../config/redis'
 const redisClient = createClient({
-    url: 'redis://127.0.0.1:6379'
+    url: `redis://${redis_config.host}:${redis_config.port}`
 })
 
 redisClient.on('error', () => {

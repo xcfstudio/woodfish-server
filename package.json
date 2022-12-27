@@ -1,10 +1,10 @@
 {
   "name": "woodfish-server",
   "version": "1.0.0",
-  "description": "木鱼网",
-  "main": "app.ts",
+  "description": "木鱼功德网",
+  "main": "index.ts",
   "author": "Eric Xie",
-  "license": "MIT",
+  "license": "Apache",
   "scripts": {
     "dev": "cross-env ENV=development nodemon index.ts",
     "tscCompile": "tsc && tsc-alias",
