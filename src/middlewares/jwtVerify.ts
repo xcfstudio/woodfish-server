@@ -2,7 +2,6 @@ import { Failure } from "@/classes/BasicResponse.class";
 import { UserAccount } from "@/models/UserAccount";
 import { sha256BasedCrypt } from "@/utils/hash";
 import { tokenFilter } from "@/modules/Users/utils/tokenRedis";
-import { security_config } from "config/security";
 import { Middleware } from "koa";
 import koaJwt from 'koa-jwt'
 import { secretKeys } from "secretkey/secret";
@@ -13,11 +12,13 @@ interface JwtPayload {
     status: string
     type: string
     secret: string
+    admin?: string
 }
 
 
 interface JwtVerifyFactoryOptions {
-    tokenType: 'access' | 'refresh'
+    tokenType: 'access' | 'refresh',
+    admin? : string
 }
 
 /**
@@ -27,6 +28,7 @@ interface JwtVerifyFactoryOptions {
  */
 const jwtVerifyFactory = (options?: JwtVerifyFactoryOptions): Middleware => {
     const type = options && options.tokenType ? options.tokenType : 'access'
+    const isAdmin = options && options.admin
     return async (ctx, next) => {
         try {
             // 获取完整token
@@ -57,10 +59,24 @@ const jwtVerifyFactory = (options?: JwtVerifyFactoryOptions): Middleware => {
                 }
             }
 
-
+            // 验证token类型
             if (jwtPayload && jwtPayload.type !== type) {
                 ctx.body = new Failure('Token type error!')
                 return
+            }
+
+            // 验证admin字段
+            if (options?.admin === 'super') {
+                if (jwtPayload.admin !== 'super') {
+                    ctx.body = new Failure('Permission denied!')
+                    return
+                }
+            }
+            if (options?.admin === 'normal') {
+                if ((jwtPayload.admin !== 'super')&&(jwtPayload.admin !== 'normal')) {
+                    ctx.body = new Failure('Permission denied!')
+                    return
+                }
             }
             // console.log(ctx.header.authorization)
             await koaJwt({ secret: secretKeys.secretKey, algorithms: ['HS256'] })(ctx, next)

@@ -6,5 +6,9 @@ const router = new Router()
 import syncModels from './service/syncmodels.service'
 router.get('/syncmodels', syncModels)
 
+// 创建超级管理员账户
+import createSuperAdmin from './service/createSuperAdmin.service'
+router.get('/superadmin', createSuperAdmin)
+
 
 export default router

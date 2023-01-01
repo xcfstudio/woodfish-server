@@ -8,6 +8,7 @@ class LoginDto extends Dto {
     @IsNotEmpty()
     @IsString()
     password: string
+    admin?: boolean
     verifycode?: string
 
     constructor(body: LoginDto) {
@@ -15,6 +16,7 @@ class LoginDto extends Dto {
         this.account = body.account
         this.password = body.password
         this.verifycode = body.verifycode
+        this.admin = body.admin
     }
 }
 
