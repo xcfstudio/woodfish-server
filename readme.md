@@ -2,6 +2,9 @@
 
 [![zzCq7d.png](https://s1.ax1x.com/2022/12/27/zzCq7d.png)](https://imgse.com/i/zzCq7d)
 
+## 20250716更新
+今天上了下github看到这个项目，怎么也想不通我大学时候怎么会弄出这么无聊的项目，我也是无语了...
+
 ## 关联前端项目
 + GitLab: https://gitlab.com/xcfstudio/woodfish-app
 + GitHub: https://github.com/xcfstudio/woodfish-app
