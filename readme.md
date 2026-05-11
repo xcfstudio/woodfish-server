@@ -78,4 +78,4 @@ sudo npm i pm2 -g
 
 ## 关于作者
 
-Eric Xie，前端开发者与工业设计师，擅长TS全栈开发、UI设计。个人网站：[https://xiecangfeng.com](https://xiecangfeng.com)
+Eric Xie，前端开发者与工业设计师，擅长TS全栈开发、UI设计。个人网站：[https://xcfstudio.com](https://xcfstudio.com)
